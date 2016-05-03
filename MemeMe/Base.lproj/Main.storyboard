@@ -37,44 +37,46 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MmU-Ej-YXl">
-                                <rect key="frame" x="20" y="79" width="560" height="30"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="Text">
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="11" name="Impact"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
-                            </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WXa-56-iB8">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="487" id="Mwb-Jr-fCo"/>
                                 </constraints>
                             </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Text" borderStyle="roundedRect" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="MmU-Ej-YXl">
+                                <rect key="frame" x="20" y="79" width="560" height="30"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="11"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="GHU-O6-VCo">
+                                <rect key="frame" x="20" y="502" width="560" height="30"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="WXa-56-iB8" secondAttribute="trailing" id="05U-R4-pug"/>
                             <constraint firstItem="WXa-56-iB8" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="2Is-4Y-Fvr"/>
+                            <constraint firstItem="PgH-xl-nQi" firstAttribute="top" secondItem="GHU-O6-VCo" secondAttribute="bottom" constant="20" id="4qR-c0-XJJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="MmU-Ej-YXl" secondAttribute="trailing" id="5XF-b2-Db9"/>
                             <constraint firstItem="WXa-56-iB8" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="82V-wj-0XY"/>
+                            <constraint firstItem="GHU-O6-VCo" firstAttribute="trailing" secondItem="MmU-Ej-YXl" secondAttribute="trailing" id="8ef-vw-HUx"/>
                             <constraint firstItem="MmU-Ej-YXl" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="15" id="8qX-GE-krP"/>
                             <constraint firstItem="PgH-xl-nQi" firstAttribute="trailing" secondItem="WXa-56-iB8" secondAttribute="trailing" id="9LT-81-H5q"/>
                             <constraint firstAttribute="leadingMargin" secondItem="MmU-Ej-YXl" secondAttribute="leading" id="XaO-TK-lZ5"/>
                             <constraint firstItem="PgH-xl-nQi" firstAttribute="top" secondItem="WXa-56-iB8" secondAttribute="bottom" constant="1" id="cyb-9Z-jZB"/>
                             <constraint firstItem="PgH-xl-nQi" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="hyn-Ib-4Hg"/>
                             <constraint firstItem="PgH-xl-nQi" firstAttribute="leading" secondItem="WXa-56-iB8" secondAttribute="leading" id="l0x-gI-mWD"/>
+                            <constraint firstItem="GHU-O6-VCo" firstAttribute="leading" secondItem="MmU-Ej-YXl" secondAttribute="leading" id="vkr-aN-AJ5"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="WXa-56-iB8" secondAttribute="bottom" constant="49" id="zJH-8d-0mh"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pvZ-Ou-yAN"/>
                     <connections>
+                        <outlet property="bottomTextField" destination="GHU-O6-VCo" id="bN8-WB-B9H"/>
                         <outlet property="cameraButton" destination="mRl-5e-kRa" id="q9t-b4-Rd1"/>
                         <outlet property="galleryButton" destination="bsa-mQ-loF" id="omS-Tt-HUA"/>
                         <outlet property="imagePickerView" destination="WXa-56-iB8" id="fRq-kO-vDv"/>
