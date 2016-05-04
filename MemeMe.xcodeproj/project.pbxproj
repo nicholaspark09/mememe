@@ -15,6 +15,7 @@
 		AF5B74591CD8ECEB007BEC46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF5B74571CD8ECEB007BEC46 /* LaunchScreen.storyboard */; };
 		AF5B74641CD8ECEB007BEC46 /* MemeMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5B74631CD8ECEB007BEC46 /* MemeMeTests.swift */; };
 		AF5B746F1CD8ECEB007BEC46 /* MemeMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5B746E1CD8ECEB007BEC46 /* MemeMeUITests.swift */; };
+		AFED26861CD978EC0050CEAD /* meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFED26851CD978EC0050CEAD /* meme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		AF5B746A1CD8ECEB007BEC46 /* MemeMeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemeMeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF5B746E1CD8ECEB007BEC46 /* MemeMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeMeUITests.swift; sourceTree = "<group>"; };
 		AF5B74701CD8ECEB007BEC46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AFED26851CD978EC0050CEAD /* meme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = meme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 		AF5B747F1CD8ED51007BEC46 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				AFED26851CD978EC0050CEAD /* meme.swift */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF5B74541CD8ECEB007BEC46 /* MemeMe.xcdatamodeld in Sources */,
+				AFED26861CD978EC0050CEAD /* meme.swift in Sources */,
 				AF5B744E1CD8ECEB007BEC46 /* ViewController.swift in Sources */,
 				AF5B744C1CD8ECEB007BEC46 /* AppDelegate.swift in Sources */,
 			);
@@ -521,6 +525,7 @@
 				AF5B74751CD8ECEB007BEC46 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AF5B74761CD8ECEB007BEC46 /* Build configuration list for PBXNativeTarget "MemeMeTests" */ = {
 			isa = XCConfigurationList;
@@ -529,6 +534,7 @@
 				AF5B74781CD8ECEB007BEC46 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AF5B74791CD8ECEB007BEC46 /* Build configuration list for PBXNativeTarget "MemeMeUITests" */ = {
 			isa = XCConfigurationList;
@@ -537,6 +543,7 @@
 				AF5B747B1CD8ECEB007BEC46 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

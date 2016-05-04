@@ -43,17 +43,17 @@
                                     <constraint firstAttribute="height" constant="487" id="Mwb-Jr-fCo"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Text" borderStyle="roundedRect" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="MmU-Ej-YXl">
-                                <rect key="frame" x="20" y="79" width="560" height="30"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="11"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="GHU-O6-VCo">
-                                <rect key="frame" x="20" y="502" width="560" height="30"/>
+                            <textField clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GHU-O6-VCo">
+                                <rect key="frame" x="20" y="515" width="560" height="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
+                            <textField clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="MmU-Ej-YXl">
+                                <rect key="frame" x="20" y="79" width="560" height="13"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -61,16 +61,18 @@
                             <constraint firstAttribute="trailing" secondItem="WXa-56-iB8" secondAttribute="trailing" id="05U-R4-pug"/>
                             <constraint firstItem="WXa-56-iB8" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="2Is-4Y-Fvr"/>
                             <constraint firstItem="PgH-xl-nQi" firstAttribute="top" secondItem="GHU-O6-VCo" secondAttribute="bottom" constant="20" id="4qR-c0-XJJ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="MmU-Ej-YXl" secondAttribute="trailing" id="5XF-b2-Db9"/>
+                            <constraint firstItem="GHU-O6-VCo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6kD-9T-VdC"/>
+                            <constraint firstItem="MmU-Ej-YXl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7hV-04-bBS"/>
                             <constraint firstItem="WXa-56-iB8" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="82V-wj-0XY"/>
-                            <constraint firstItem="GHU-O6-VCo" firstAttribute="trailing" secondItem="MmU-Ej-YXl" secondAttribute="trailing" id="8ef-vw-HUx"/>
                             <constraint firstItem="MmU-Ej-YXl" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="15" id="8qX-GE-krP"/>
                             <constraint firstItem="PgH-xl-nQi" firstAttribute="trailing" secondItem="WXa-56-iB8" secondAttribute="trailing" id="9LT-81-H5q"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="MmU-Ej-YXl" secondAttribute="leading" id="XaO-TK-lZ5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="MmU-Ej-YXl" secondAttribute="trailing" id="Stv-31-b1g"/>
                             <constraint firstItem="PgH-xl-nQi" firstAttribute="top" secondItem="WXa-56-iB8" secondAttribute="bottom" constant="1" id="cyb-9Z-jZB"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="MmU-Ej-YXl" secondAttribute="leading" id="gUP-kx-qyn"/>
                             <constraint firstItem="PgH-xl-nQi" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="hyn-Ib-4Hg"/>
                             <constraint firstItem="PgH-xl-nQi" firstAttribute="leading" secondItem="WXa-56-iB8" secondAttribute="leading" id="l0x-gI-mWD"/>
-                            <constraint firstItem="GHU-O6-VCo" firstAttribute="leading" secondItem="MmU-Ej-YXl" secondAttribute="leading" id="vkr-aN-AJ5"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="GHU-O6-VCo" secondAttribute="leading" id="mxN-lN-Zme"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="GHU-O6-VCo" secondAttribute="trailing" id="xn0-Hn-rbO"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="WXa-56-iB8" secondAttribute="bottom" constant="49" id="zJH-8d-0mh"/>
                         </constraints>
                     </view>

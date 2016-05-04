@@ -11,6 +11,8 @@ import UIKit
 @objc protocol MemeProtocol{
     func keyboardWillShow(sender: NSNotification)
     func keybaordWillHide(sender: NSNotification)
+    func uploadMeme()
+    func cancelMeme()
 }
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
@@ -24,9 +26,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         NSStrokeColorAttributeName : UIColor.blackColor(),
         NSForegroundColorAttributeName : UIColor.whiteColor(),
         NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-        NSStrokeWidthAttributeName : NSNumber.init(float: 2)
+        NSStrokeWidthAttributeName : -1.0
     ]
     
+    var currentMeme:Meme?{
+        didSet{
+            print("The meme was saved")
+        }
+    }
     
     @IBOutlet var imagePickerView: UIImageView!
     @IBOutlet var galleryButton: UIButton!
@@ -38,13 +45,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewDidLoad() {
         super.viewDidLoad()
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
-        titleTextField.text = Constants.TopText
-        titleTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.text = Constants.BottomText
         
-        titleTextField.delegate = self
-        bottomTextField.delegate = self
+        setup()
+        
+        //SET THE NAVBAR ITEMS  
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: #selector(MemeProtocol.uploadMeme))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(MemeProtocol.cancelMeme))
     }
 
     
@@ -79,12 +85,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
+    
+    /*
+        KEYBOARD shtuff
+    */
+    
     func keyboardWillShow(sender: NSNotification){
-        self.view.frame.origin.y -= getKeyboardHeight(sender)
+        if bottomTextField.isFirstResponder() {
+            self.view.frame.origin.y -= getKeyboardHeight(sender)
+        }
     }
     
     func keybaordWillHide(sender: NSNotification){
-        self.view.frame.origin.y += getKeyboardHeight(sender)
+        if bottomTextField.isFirstResponder(){
+            self.view.frame.origin.y += getKeyboardHeight(sender)
+        }
     }
     
     func getKeyboardHeight(notification: NSNotification) -> CGFloat {
@@ -114,6 +129,57 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func unsubscribeToKeyboardNotifications(){
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    
+    func setup(){
+        titleTextField.text = Constants.TopText
+        titleTextField.defaultTextAttributes = memeTextAttributes
+        bottomTextField.defaultTextAttributes = memeTextAttributes
+        bottomTextField.text = Constants.BottomText
+        titleTextField.delegate = self
+        bottomTextField.delegate = self
+    }
+    
+    /*
+            MEME Methods
+                Please don't be meme...
+     */
+    
+    func saveMeme(){
+        currentMeme = Meme(topText: titleTextField.text!, image: imagePickerView.image, bottomText: bottomTextField.text!, memedImage: generateMemedImage())
+        
+    }
+    
+    func generateMemedImage() -> UIImage{
+        
+        //HIDE the navigation bar first
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        view.drawViewHierarchyInRect(self.view.frame,
+                                     afterScreenUpdates: true)
+        let memedImage : UIImage =
+            UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        //Show the Navigation Bar again
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        return memedImage
+    }
+    
+    func uploadMeme(){
+        saveMeme()
+        
+    }
+    
+    func cancelMeme(){
+        imagePickerView.image = nil
+        titleTextField.text = Constants.TopText
+        bottomTextField.text = Constants.BottomText
+        if titleTextField.isFirstResponder() {
+            titleTextField.resignFirstResponder()
+        }else if bottomTextField.isFirstResponder(){
+            bottomTextField.resignFirstResponder()
+        }
     }
 }
 
