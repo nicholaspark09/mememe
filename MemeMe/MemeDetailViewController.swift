@@ -31,7 +31,7 @@ class MemeDetailViewController: UIViewController {
         title = Constants.Title
         if meme != nil{
             memeImageView.image = meme!.memedImage
-            memeImageView.contentMode = UIViewContentMode.ScaleAspectFill
+            memeImageView.contentMode = .ScaleAspectFit
         }
     }
 
