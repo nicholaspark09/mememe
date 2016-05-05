@@ -11,7 +11,7 @@ import UIKit
 @objc protocol MemeProtocol{
     func keyboardWillShow(sender: NSNotification)
     func keybaordWillHide(sender: NSNotification)
-    func uploadMeme()
+    func saveMeme()
     func cancelMeme()
 }
 
@@ -20,7 +20,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     struct Constants{
         static let TopText = "TOP"
         static let BottomText = "BOTTOM"
+        static let PreviewSegue = "Preview Segue"
     }
+
     
     let memeTextAttributes = [
         NSStrokeColorAttributeName : UIColor.blackColor(),
@@ -29,15 +31,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         NSStrokeWidthAttributeName : -1.0
     ]
     
-    var currentMeme:Meme?{
-        didSet{
-            print("The meme was saved")
-        }
-    }
+    var currentMeme:Meme?
     
     @IBOutlet var imagePickerView: UIImageView!
-    @IBOutlet var galleryButton: UIButton!
-    @IBOutlet var cameraButton: UIButton!
+
+    @IBOutlet var galleryButton: UIBarButtonItem!
+    @IBOutlet var cameraButton: UIBarButtonItem!
+    @IBOutlet var toolBar: UIToolbar!
     
     @IBOutlet var bottomTextField: UITextField!
     @IBOutlet var titleTextField: UITextField!
@@ -49,8 +49,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         setup()
         
         //SET THE NAVBAR ITEMS  
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: #selector(MemeProtocol.uploadMeme))
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: #selector(MemeProtocol.saveMeme))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(MemeProtocol.cancelMeme))
+        
+        self.navigationItem.leftBarButtonItem?.enabled = false
+        
+        self.title = "Meme Me"
     }
 
     
@@ -82,6 +87,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         dismissViewControllerAnimated(true, completion: nil)
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{
             imagePickerView.image = image
+            imagePickerView.contentMode = UIViewContentMode.ScaleAspectFit
+            self.navigationItem.leftBarButtonItem?.enabled = true
         }
     }
     
@@ -139,6 +146,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         bottomTextField.text = Constants.BottomText
         titleTextField.delegate = self
         bottomTextField.delegate = self
+        
+        //The Text Field kept bumping left, so I had to use this workaround
+        /*
+            Is there a better way to do it?
+        */
+        titleTextField.textAlignment = NSTextAlignment.Center
+        bottomTextField.textAlignment = NSTextAlignment.Center
     }
     
     /*
@@ -148,29 +162,33 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func saveMeme(){
         currentMeme = Meme(topText: titleTextField.text!, image: imagePickerView.image, bottomText: bottomTextField.text!, memedImage: generateMemedImage())
-        
+        if currentMeme != nil{
+            performSegueWithIdentifier(Constants.PreviewSegue, sender: nil)
+        }
     }
     
     func generateMemedImage() -> UIImage{
         
         //HIDE the navigation bar first
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        view.drawViewHierarchyInRect(self.view.frame,
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        toolBar.hidden = true
+        
+        //Save Shtuff
+        UIGraphicsBeginImageContext(self.imagePickerView.frame.size)
+        view.drawViewHierarchyInRect(self.imagePickerView.frame,
                                      afterScreenUpdates: true)
         let memedImage : UIImage =
             UIGraphicsGetImageFromCurrentImageContext()
+        //memedImage.drawAtPoint(CGPointMake(0, imagePickerView.frame.origin.y))
         UIGraphicsEndImageContext()
+        
         //Show the Navigation Bar again
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        toolBar.hidden = false
         return memedImage
     }
     
-    func uploadMeme(){
-        saveMeme()
-        
-    }
-    
+
     func cancelMeme(){
         imagePickerView.image = nil
         titleTextField.text = Constants.TopText
@@ -179,6 +197,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             titleTextField.resignFirstResponder()
         }else if bottomTextField.isFirstResponder(){
             bottomTextField.resignFirstResponder()
+        }
+        self.navigationItem.leftBarButtonItem?.enabled = false
+    }
+    
+    // MARK: - Navigation
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == Constants.PreviewSegue {
+            if let pvc = segue.destinationViewController as? PreviewViewController{
+                pvc.meme = currentMeme
+            }
         }
     }
 }
