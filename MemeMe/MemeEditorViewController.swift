@@ -20,6 +20,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     struct Constants{
         static let TopText = "TOP"
         static let BottomText = "BOTTOM"
+        static let Title = "New Meme"
     }
 
     
@@ -36,7 +37,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet var toolBar: UIToolbar!
     @IBOutlet var bottomTextField: UITextField!
     @IBOutlet var titleTextField: UITextField!
-    
+    @IBOutlet var navigationBar: UINavigationBar!
+    var navItem: UINavigationItem?
     
     
     
@@ -46,13 +48,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         setup()
         
-        //SET THE NAVBAR ITEMS  
-        
+        //SET THE NAVBAR ITEMS
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: #selector(MemeProtocol.shareMeme))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(MemeProtocol.cancelMeme))
         navigationItem.leftBarButtonItem?.enabled = false
-        
-        title = "Meme Me"
+        navigationBar.items = [navigationItem]
     }
 
     
@@ -181,7 +181,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         activityVC.excludedActivityTypes = [UIActivityTypeCopyToPasteboard,UIActivityTypeAirDrop,UIActivityTypeAddToReadingList,UIActivityTypeAssignToContact,UIActivityTypePostToTencentWeibo,UIActivityTypePostToVimeo,UIActivityTypePrint,UIActivityTypeSaveToCameraRoll,UIActivityTypePostToWeibo]
         presentViewController(activityVC, animated: true, completion: {
             let meme = Meme(topText: self.titleTextField!.text!, image: self.imagePickerView!.image, bottomText: self.bottomTextField!.text!, memedImage: generatedImage)
-            print("You saved the meme with title: \(meme.topText)")
+            (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
         })
         
     }
@@ -189,26 +189,26 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     func generateMemedImage() -> UIImage{
         
         //HIDE the navigation bar first
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationBar.hidden = true
         toolBar.hidden = true
-        
         //Save Shtuff
-        UIGraphicsBeginImageContext(self.imagePickerView.frame.size)
-        view.drawViewHierarchyInRect(self.imagePickerView.frame,
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        view.drawViewHierarchyInRect(self.view.frame,
                                      afterScreenUpdates: true)
         let memedImage : UIImage =
             UIGraphicsGetImageFromCurrentImageContext()
-        //memedImage.drawAtPoint(CGPointMake(0, imagePickerView.frame.origin.y))
+        memedImage.drawAtPoint(CGPointMake(0, 50))
         UIGraphicsEndImageContext()
         
         //Show the Navigation Bar again
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationBar.hidden = false
         toolBar.hidden = false
         return memedImage
     }
     
 
     func cancelMeme(){
+        /*
         imagePickerView.image = nil
         titleTextField.text = Constants.TopText
         bottomTextField.text = Constants.BottomText
@@ -218,6 +218,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             bottomTextField.resignFirstResponder()
         }
         self.navigationItem.leftBarButtonItem?.enabled = false
+ */
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     // MARK: - Navigation
