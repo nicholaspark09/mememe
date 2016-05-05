@@ -6,10 +6,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Meme Editor View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MemeEditorViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -38,12 +38,12 @@
                                 <items>
                                     <barButtonItem image="Camera" id="qMl-fo-1BV">
                                         <connections>
-                                            <action selector="pickAnImageFromCamera:" destination="BYZ-38-t0r" id="ghg-lI-N6a"/>
+                                            <action selector="getImageButtonClicked:" destination="BYZ-38-t0r" id="jPs-ha-rUE"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem image="Gallery" id="LRd-bj-KHq">
+                                    <barButtonItem tag="1" image="Gallery" id="LRd-bj-KHq">
                                         <connections>
-                                            <action selector="pickAnImageFromAlbum:" destination="BYZ-38-t0r" id="pV3-a7-4t9"/>
+                                            <action selector="getImageButtonClicked:" destination="BYZ-38-t0r" id="aDv-R4-ewe"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -78,57 +78,11 @@
                         <outlet property="imagePickerView" destination="WXa-56-iB8" id="fRq-kO-vDv"/>
                         <outlet property="titleTextField" destination="MmU-Ej-YXl" id="eyO-Px-XOf"/>
                         <outlet property="toolBar" destination="cah-pb-53C" id="Y0I-iY-0SJ"/>
-                        <segue destination="vIl-to-Vgl" kind="show" identifier="Preview Segue" id="Fw8-q7-ckJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="930" y="341"/>
-        </scene>
-        <!--Preview View Controller-->
-        <scene sceneID="L5X-lh-az7">
-            <objects>
-                <viewController id="vIl-to-Vgl" customClass="PreviewViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Qor-1Y-jYg"/>
-                        <viewControllerLayoutGuide type="bottom" id="raD-J7-bAA"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="0NX-Yz-jL9">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZTJ-si-fz6">
-                                <rect key="frame" x="20" y="64" width="560" height="435"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mQt-BE-3fa">
-                                <rect key="frame" x="277" y="509" width="46" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="MBL-JZ-0mE"/>
-                                    <constraint firstAttribute="height" constant="34" id="V3S-vW-cA7"/>
-                                </constraints>
-                                <state key="normal" title="Button" image="Share"/>
-                                <connections>
-                                    <action selector="shareClicked:" destination="vIl-to-Vgl" eventType="touchUpInside" id="brk-ln-o70"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="mQt-BE-3fa" firstAttribute="centerX" secondItem="0NX-Yz-jL9" secondAttribute="centerX" id="Gfh-nf-cEe"/>
-                            <constraint firstItem="mQt-BE-3fa" firstAttribute="top" secondItem="ZTJ-si-fz6" secondAttribute="bottom" constant="10" id="M7S-z3-3iT"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ZTJ-si-fz6" secondAttribute="trailing" id="Q5Z-TK-Hpt"/>
-                            <constraint firstItem="raD-J7-bAA" firstAttribute="top" secondItem="mQt-BE-3fa" secondAttribute="bottom" constant="8" id="gJT-de-xgQ"/>
-                            <constraint firstItem="ZTJ-si-fz6" firstAttribute="top" secondItem="Qor-1Y-jYg" secondAttribute="bottom" id="hrd-8t-eeZ"/>
-                            <constraint firstItem="ZTJ-si-fz6" firstAttribute="leading" secondItem="0NX-Yz-jL9" secondAttribute="leadingMargin" id="p1P-kf-Fxz"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="memeImageView" destination="ZTJ-si-fz6" id="VLg-Zd-g1I"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rUd-ov-KrX" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1626" y="341"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5eg-Ut-zgv">
@@ -152,6 +106,5 @@
     <resources>
         <image name="Camera" width="32" height="32"/>
         <image name="Gallery" width="32" height="32"/>
-        <image name="Share" width="64" height="64"/>
     </resources>
 </document>
